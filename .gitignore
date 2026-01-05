@@ -1,0 +1,23 @@
+.DS_Store
+*.parquet
+*.nosync
+.env
+.venv
+*.csv
+.vscode/
+__pycache__/
+dist/
+build/
+.autosave.oxm
+
+/target
+/assets
+
+# Added by cargo
+*/target
+
+# Rust coverage
+*.profraw
+*.profdata
+coverage/
+lcov.info
