@@ -1,0 +1,70 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - "v*"
+
+permissions:
+  contents: write
+
+env:
+  CRATE_NAME: miditui
+
+jobs:
+  crates_io_publish:
+    name: Crates.io Publish
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@stable
+      - name: Publish to Crates.io
+        run: cargo publish --token ${{ secrets.CRATES_IO_TOKEN }}
+
+  build_binaries:
+    name: Build Binaries
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        include:
+          - os: ubuntu-latest
+            target: x86_64-unknown-linux-gnu
+            suffix: linux
+          # For ARM Linux, we use cross to build the binary: the Linux ARM toolchains
+          # are not available for private repos, so cross provides a workaround
+          - os: ubuntu-latest
+            target: aarch64-unknown-linux-gnu
+            suffix: linux-arm64
+            use_cross: true
+          - os: macos-13
+            target: x86_64-apple-darwin
+            suffix: macos-intel
+          - os: macos-latest
+            target: aarch64-apple-darwin
+            suffix: macos-arm
+          - os: windows-latest
+            target: x86_64-pc-windows-msvc
+            suffix: windows
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@stable
+        with:
+          targets: ${{ matrix.target }}
+
+      - name: Install cross
+        if: matrix.use_cross
+        run: cargo install cross --git https://github.com/cross-rs/cross
+
+      - name: Build Binary
+        run: ${{ matrix.use_cross && 'cross' || 'cargo' }} build --release --target ${{ matrix.target }}
+
+      - name: Rename binary
+        shell: bash
+        run: |
+          ext=${{ matrix.os == 'windows-latest' && '.exe' || '' }}
+          cp "target/${{ matrix.target }}/release/${CRATE_NAME}${ext}" "${CRATE_NAME}-${{ matrix.suffix }}${ext}"
+
+      - name: Upload Release Asset
+        uses: softprops/action-gh-release@v1
+        with:
+          files: ${{ env.CRATE_NAME }}-${{ matrix.suffix }}${{ matrix.os == 'windows-latest' && '.exe' || '' }}
