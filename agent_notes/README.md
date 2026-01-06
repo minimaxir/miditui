@@ -1,4 +1,4 @@
-## Agentic Coding Notes
+# Agentic Coding Notes
 
 The app was built using Claude Code, using zero agentic coding shenanigans: just typical prompts and an elaborate [CLAUDE.md](CLAUDE.md), which I have included in this repo. Additionally, I have also included the prompts I gave to Claude Opus 4.5 to help build—[40 ticket-esque prompts](PROMPTS.md) total—where after each prompt I review the code, manually test, and manually commit if it works as specified.
 

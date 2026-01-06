@@ -1,6 +1,6 @@
 [package]
 name = "miditui"
-version = "0.1.1"
+version = "0.1.2"
 edition = "2021"
 description = "An interactive terminal app/UI for MIDI composing, mixing, and playback."
 authors = ["Max Woolf"]

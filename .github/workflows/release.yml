@@ -18,6 +18,8 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: dtolnay/rust-toolchain@stable
+      - name: Install Linux dependencies
+        run: sudo apt-get update && sudo apt-get install -y libasound2-dev
       - name: Publish to Crates.io
         run: cargo publish --token ${{ secrets.CRATES_IO_TOKEN }}
 
@@ -36,7 +38,7 @@ jobs:
             target: aarch64-unknown-linux-gnu
             suffix: linux-arm64
             use_cross: true
-          - os: macos-13
+          - os: macos-15-intel
             target: x86_64-apple-darwin
             suffix: macos-intel
           - os: macos-latest
@@ -57,7 +59,7 @@ jobs:
 
       - name: Install Linux dependencies
         if: runner.os == 'Linux'
-        run: sudo apt-get update && sudo apt-get install -y libasound2-dev
+        run: sudo apt-get update && sudo apt-get install -y alsa-utils libasound2-dev || sudo apt-get install -y alsa-utils libasound-dev
 
       - name: Build Binary
         run: ${{ matrix.use_cross && 'cross' || 'cargo' }} build --release --target ${{ matrix.target }}
