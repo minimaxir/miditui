@@ -10,7 +10,7 @@ An interactive terminal app/UI for MIDI composing, mixing, and playback—writte
 
 - Full terminal mouse support: click, drag, scroll, double-click, right-click all work, which allows you to pan views, select notes, click piano keys to play them
 - A piano roll view for showing the notes as they are played in the song
-  - An Insert mode to press keys on your keyboard (or simply click the piano roll) and create music in real time: Two-octave QWERTY layout (Z-M and Q-I rows) with live audio playback as you type, visual keyboard showing held notes
+- An Insert mode to press keys on your keyboard (or simply click the piano roll) and create music in real time: Two-octave QWERTY layout (Z-M and Q-I rows) with live audio playback as you type
 - A project timeline timeline view to see all the notes
 - Low-latency 44.1kHz audio via [rustysynth](https://github.com/sinshu/rustysynth)
 - Timeline seeking by clicking the time rulers to skip to any point of the track
