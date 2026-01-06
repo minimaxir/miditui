@@ -144,6 +144,12 @@ Add MIDI `.mid` file importing. A test file is present at `spy_thriller_theme.mi
 
 ---
 
+# 15.md
+
+_**Editor's note**: This prompt was removed and never ran because it was a silly idea._
+
+---
+
 # 16.md
 
 Add autosave functionality: after a period of inactivity, the file is automatically saved as a `autosave.oxm` file in the current working directory. After relaunching the app, it automatically reloads the autosave file.
