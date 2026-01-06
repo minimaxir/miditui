@@ -1,8 +1,8 @@
 [package]
 name = "miditui"
-version = "0.1.0"
+version = "0.1.1"
 edition = "2021"
-description = "A terminal-based MIDI composer and player with multi-track support"
+description = "An interactive terminal app/UI for MIDI composing, mixing, and playback."
 authors = ["Max Woolf"]
 
 [[bin]]
