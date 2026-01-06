@@ -10,6 +10,8 @@ dist/
 build/
 .autosave.oxm
 Dance.mid
+*.sf2
+output/
 
 /target
 /assets
