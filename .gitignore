@@ -9,6 +9,7 @@ __pycache__/
 dist/
 build/
 .autosave.oxm
+Dance.mid
 
 /target
 /assets
