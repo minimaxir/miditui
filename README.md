@@ -29,15 +29,11 @@ The app binaries can be downloaded from the [Releases page](https://github.com/m
 
 ```sh
 # macOS Apple Silicon
-curl -sL https://github.com/minimaxir/miditui/releases/latest/download/miditui-macos-arm
-chmod +x miditui-macos-arm
-xattr -d com.apple.quarantine miditui-macos-arm
+curl -sL https://github.com/minimaxir/miditui/releases/latest/download/miditui-macos-arm.tar.gz | tar xz
 ./miditui-macos-arm
 
 # macOS Intel
-curl -sL https://github.com/minimaxir/miditui/releases/latest/download/miditui-macos-arm
-chmod +x miditui-macos-intel
-xattr -d com.apple.quarantine miditui-macos-intel
+curl -sL https://github.com/minimaxir/miditui/releases/latest/download/miditui-macos-intel.tar.gz | tar xz
 ./miditui-macos-intel
 
 # Linux ARM64
@@ -45,10 +41,11 @@ chmod +x miditui-linux-arm64
 ./miditui-linux
 
 # Linux x64
+curl -sL https://github.com/minimaxir/miditui/releases/latest/download/miditui-linux.tar.gz | tar xz
 chmod +x miditui-linux
 ./miditui-linux
 
-# Windows
+# Windows (can also double-click the .exe)
 .\miditui-windows.exe
 ```
 

@@ -44,6 +44,7 @@ jobs:
 
       - name: Get crate name
         id: crate
+        shell: bash
         run: echo "name=$(grep -m1 '^name' Cargo.toml | cut -d'"' -f2)" >> "$GITHUB_OUTPUT"
 
       - name: Install Linux dependencies
