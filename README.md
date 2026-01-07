@@ -29,11 +29,13 @@ The app binaries can be downloaded from the [Releases page](https://github.com/m
 
 ```sh
 # macOS Apple Silicon
+curl -sL https://github.com/minimaxir/miditui/releases/latest/download/miditui-macos-arm
 chmod +x miditui-macos-arm
 xattr -d com.apple.quarantine miditui-macos-arm
 ./miditui-macos-arm
 
 # macOS Intel
+curl -sL https://github.com/minimaxir/miditui/releases/latest/download/miditui-macos-arm
 chmod +x miditui-macos-intel
 xattr -d com.apple.quarantine miditui-macos-intel
 ./miditui-macos-intel

@@ -32,6 +32,7 @@ jobs:
         include:
           - os: ubuntu-latest
             suffix: linux
+            # must be a public GitHub repository
           - os: ubuntu-24.04-arm
             suffix: linux-arm64
           - os: macos-15-intel
@@ -59,13 +60,19 @@ jobs:
           CARGO_INCREMENTAL: 0
         run: cargo build --release
 
-      - name: Rename binary
-        shell: bash
+      - name: Package binary (Unix)
+        if: runner.os != 'Windows'
         run: |
-          ext=${{ matrix.os == 'windows-latest' && '.exe' || '' }}
-          cp "target/release/${CRATE_NAME}${ext}" "${CRATE_NAME}-${{ matrix.suffix }}${ext}"
+          chmod +x "target/release/${CRATE_NAME}"
+          tar -czvf "${CRATE_NAME}-${{ matrix.suffix }}.tar.gz" -C target/release "${CRATE_NAME}"
+
+      - name: Package binary (Windows)
+        if: runner.os == 'Windows'
+        run: |
+          Compress-Archive -Path "target/release/${env:CRATE_NAME}.exe" -DestinationPath "${env:CRATE_NAME}-${{ matrix.suffix }}.zip"
+        shell: powershell
 
       - name: Upload Release Asset
         uses: softprops/action-gh-release@v1
         with:
-          files: ${{ env.CRATE_NAME }}-${{ matrix.suffix }}${{ matrix.os == 'windows-latest' && '.exe' || '' }}
+          files: ${{ env.CRATE_NAME }}-${{ matrix.suffix }}${{ runner.os == 'Windows' && '.zip' || '.tar.gz' }}
