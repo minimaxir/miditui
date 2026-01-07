@@ -73,6 +73,7 @@ If you want example MIDIs for testing, you can view the examples folder.
 - Due to variations in terminal support, key release events [cannot be reliably detected](https://stackoverflow.com/a/74422335), which means the piano-key-input intentionally does not support holding keys to extend notes, unfortunately.
 - Music files are autosaved as a bespoke `.oxm` binary file, which essentially wraps the song metadata with a few added fields outside of the MIDI spec, such as the SoundFont path and the mute/solo status of each track.
 - The Ghostty terminal theme used in the example image/video is by David Crespo and is available [here](https://github.com/david-crespo/dotfiles/blob/main/ghostty/config), although the examples use the [Jetbrains Mono](https://www.jetbrains.com/lp/mono/) fontface instead.
+- The music file played in the demo video is `Dance.mid` by S. Christian Collins, located [here](https://github.com/mrbumpy409/GeneralUser-GS/tree/main/demo%20MIDIs) with other demo MIDIs.
 
 ## License
 

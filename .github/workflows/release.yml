@@ -32,12 +32,8 @@ jobs:
         include:
           - os: ubuntu-latest
             suffix: linux
-          # For ARM Linux, we use cross to build the binary: the Linux ARM toolchains
-          # are not available for private repos, so cross provides a workaround
-          - os: ubuntu-latest
+          - os: ubuntu-24.04-arm
             suffix: linux-arm64
-            target: aarch64-unknown-linux-gnu
-            use_cross: true
           - os: macos-15-intel
             suffix: macos-intel
           - os: macos-latest
@@ -47,16 +43,10 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: dtolnay/rust-toolchain@stable
-        with:
-          targets: ${{ matrix.target }}
 
       - name: Install Linux dependencies
-        if: runner.os == 'Linux' && !matrix.use_cross
+        if: runner.os == 'Linux'
         run: sudo apt-get update && sudo apt-get install -y libasound2-dev
-
-      - name: Install cross
-        if: matrix.use_cross
-        run: cargo install cross --git https://github.com/cross-rs/cross
 
       - name: Disable Windows Defender (speed up build)
         if: runner.os == 'Windows'
@@ -67,15 +57,13 @@ jobs:
       - name: Build Binary
         env:
           CARGO_INCREMENTAL: 0
-          PKG_CONFIG_ALLOW_CROSS: 1
-        run: ${{ matrix.use_cross && format('cross build --release --target {0}', matrix.target) || 'cargo build --release' }}
+        run: cargo build --release
 
       - name: Rename binary
         shell: bash
         run: |
           ext=${{ matrix.os == 'windows-latest' && '.exe' || '' }}
-          src=${{ matrix.use_cross && format('target/{0}/release', matrix.target) || 'target/release' }}
-          cp "${src}/${CRATE_NAME}${ext}" "${CRATE_NAME}-${{ matrix.suffix }}${ext}"
+          cp "target/release/${CRATE_NAME}${ext}" "${CRATE_NAME}-${{ matrix.suffix }}${ext}"
 
       - name: Upload Release Asset
         uses: softprops/action-gh-release@v1
