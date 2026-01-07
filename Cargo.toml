@@ -1,6 +1,6 @@
 [package]
 name = "miditui"
-version = "0.1.4"
+version = "0.1.5"
 edition = "2021"
 description = "An interactive terminal app/UI for MIDI composing, mixing, and playback."
 authors = ["Max Woolf"]
@@ -29,7 +29,7 @@ uuid = { version = "1.0", features = ["v4"] }
 
 [profile.release]
 opt-level = 3
-lto = true
+lto = "thin"
 codegen-units = 1
 strip = true
 panic = "abort"

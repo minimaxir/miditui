@@ -67,6 +67,7 @@ jobs:
       - name: Build Binary
         env:
           CARGO_INCREMENTAL: 0
+          PKG_CONFIG_ALLOW_CROSS: 1
         run: ${{ matrix.use_cross && format('cross build --release --target {0}', matrix.target) || 'cargo build --release' }}
 
       - name: Rename binary
