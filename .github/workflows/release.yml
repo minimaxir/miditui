@@ -8,9 +8,6 @@ on:
 permissions:
   contents: write
 
-env:
-  CRATE_NAME: miditui
-
 jobs:
   crates_io_publish:
     name: Crates.io Publish
@@ -45,6 +42,10 @@ jobs:
       - uses: actions/checkout@v4
       - uses: dtolnay/rust-toolchain@stable
 
+      - name: Get crate name
+        id: crate
+        run: echo "name=$(grep -m1 '^name' Cargo.toml | cut -d'"' -f2)" >> "$GITHUB_OUTPUT"
+
       - name: Install Linux dependencies
         if: runner.os == 'Linux'
         run: sudo apt-get update && sudo apt-get install -y libasound2-dev
@@ -63,16 +64,16 @@ jobs:
       - name: Package binary (Unix)
         if: runner.os != 'Windows'
         run: |
-          chmod +x "target/release/${CRATE_NAME}"
-          tar -czvf "${CRATE_NAME}-${{ matrix.suffix }}.tar.gz" -C target/release "${CRATE_NAME}"
+          chmod +x "target/release/${{ steps.crate.outputs.name }}"
+          tar -czvf "${{ steps.crate.outputs.name }}-${{ matrix.suffix }}.tar.gz" -C target/release "${{ steps.crate.outputs.name }}"
 
       - name: Package binary (Windows)
         if: runner.os == 'Windows'
         run: |
-          Compress-Archive -Path "target/release/${env:CRATE_NAME}.exe" -DestinationPath "${env:CRATE_NAME}-${{ matrix.suffix }}.zip"
+          Compress-Archive -Path "target/release/${{ steps.crate.outputs.name }}.exe" -DestinationPath "${{ steps.crate.outputs.name }}-${{ matrix.suffix }}.zip"
         shell: powershell
 
       - name: Upload Release Asset
         uses: softprops/action-gh-release@v1
         with:
-          files: ${{ env.CRATE_NAME }}-${{ matrix.suffix }}${{ runner.os == 'Windows' && '.zip' || '.tar.gz' }}
+          files: ${{ steps.crate.outputs.name }}-${{ matrix.suffix }}${{ runner.os == 'Windows' && '.zip' || '.tar.gz' }}
