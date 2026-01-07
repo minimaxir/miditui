@@ -58,6 +58,12 @@ jobs:
         if: matrix.use_cross
         run: cargo install cross --git https://github.com/cross-rs/cross
 
+      - name: Disable Windows Defender (speed up build)
+        if: runner.os == 'Windows'
+        run: |
+          Set-MpPreference -DisableRealtimeMonitoring $true
+        shell: powershell
+
       - name: Build Binary
         env:
           CARGO_INCREMENTAL: 0

@@ -1,9 +1,10 @@
 [package]
 name = "miditui"
-version = "0.1.3"
+version = "0.1.4"
 edition = "2021"
 description = "An interactive terminal app/UI for MIDI composing, mixing, and playback."
 authors = ["Max Woolf"]
+license = "MIT"
 
 [[bin]]
 name = "miditui"
@@ -27,7 +28,7 @@ midly = "0.5"
 uuid = { version = "1.0", features = ["v4"] }
 
 [profile.release]
-opt-level = "z"
+opt-level = 3
 lto = true
 codegen-units = 1
 strip = true
