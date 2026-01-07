@@ -26,26 +26,23 @@ jobs:
   build_binaries:
     name: Build Binaries
     runs-on: ${{ matrix.os }}
+    timeout-minutes: 60
     strategy:
       matrix:
         include:
           - os: ubuntu-latest
-            target: x86_64-unknown-linux-gnu
             suffix: linux
           # For ARM Linux, we use cross to build the binary: the Linux ARM toolchains
           # are not available for private repos, so cross provides a workaround
           - os: ubuntu-latest
-            target: aarch64-unknown-linux-gnu
             suffix: linux-arm64
+            target: aarch64-unknown-linux-gnu
             use_cross: true
           - os: macos-15-intel
-            target: x86_64-apple-darwin
             suffix: macos-intel
           - os: macos-latest
-            target: aarch64-apple-darwin
             suffix: macos-arm
           - os: windows-latest
-            target: x86_64-pc-windows-msvc
             suffix: windows
     steps:
       - uses: actions/checkout@v4
@@ -53,22 +50,25 @@ jobs:
         with:
           targets: ${{ matrix.target }}
 
+      - name: Install Linux dependencies
+        if: runner.os == 'Linux' && !matrix.use_cross
+        run: sudo apt-get update && sudo apt-get install -y libasound2-dev
+
       - name: Install cross
         if: matrix.use_cross
         run: cargo install cross --git https://github.com/cross-rs/cross
 
-      - name: Install Linux dependencies
-        if: runner.os == 'Linux'
-        run: sudo apt-get update && sudo apt-get install -y alsa-utils libasound2-dev || sudo apt-get install -y alsa-utils libasound-dev
-
       - name: Build Binary
-        run: ${{ matrix.use_cross && 'cross' || 'cargo' }} build --release --target ${{ matrix.target }}
+        env:
+          CARGO_INCREMENTAL: 0
+        run: ${{ matrix.use_cross && format('cross build --release --target {0}', matrix.target) || 'cargo build --release' }}
 
       - name: Rename binary
         shell: bash
         run: |
           ext=${{ matrix.os == 'windows-latest' && '.exe' || '' }}
-          cp "target/${{ matrix.target }}/release/${CRATE_NAME}${ext}" "${CRATE_NAME}-${{ matrix.suffix }}${ext}"
+          src=${{ matrix.use_cross && format('target/{0}/release', matrix.target) || 'target/release' }}
+          cp "${src}/${CRATE_NAME}${ext}" "${CRATE_NAME}-${{ matrix.suffix }}${ext}"
 
       - name: Upload Release Asset
         uses: softprops/action-gh-release@v1

@@ -25,7 +25,30 @@ _**Disclosure:** This crate was coded with the assistance of Claude Opus 4.5, mo
 
 ## Installation
 
-The app binaries can be downloaded from the Releases page of this repo, or by using the following terminal commands:
+The app binaries can be downloaded from the [Releases page](https://github.com/minimaxir/miditui/releases) for your platform of choice, or by using the following terminal commands:
+
+```sh
+# macOS Apple Silicon
+chmod +x miditui-macos-arm
+xattr -d com.apple.quarantine miditui-macos-arm
+./miditui-macos-arm
+
+# macOS Intel
+chmod +x miditui-macos-intel
+xattr -d com.apple.quarantine miditui-macos-intel
+./miditui-macos-intel
+
+# Linux ARM64
+chmod +x miditui-linux-arm64
+./miditui-linux
+
+# Linux x64
+chmod +x miditui-linux
+./miditui-linux
+
+# Windows
+.\miditui-windows.exe
+```
 
 If Rust is installed, you can install the crate directly via `cargo`:
 
