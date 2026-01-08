@@ -23,7 +23,7 @@ Watch this video to see `miditui` in action (enable sound within the in-line pla
 
 https://github.com/user-attachments/assets/faab0610-e1a8-4c4c-9b94-850fa18aedd3
 
-_**Disclosure:** This crate was coded with the assistance of Claude Opus 4.5, mostly as a personal experiment just to see how well modern coding agents can handle TUIs and I figured a full-on MIDI mixer which has atypical UI requirements would be a more **interesting** test. Opus 4.5 did a good job and after a demo [went viral on X](https://x.com/minimaxir/status/2005779586676842646) people were asking for me to release it, so I decided to spend extra time polishing and comprehensively testing the app before then open-sourcing it. I have written a full analysis of the agentic coding workflow—including the prompts provided to Opus 4.5—in the [agent_notes folder](agent_notes/)._
+_**Disclosure:** This crate was developed with the assistance of [Claude Opus 4.5](https://www.anthropic.com/news/claude-opus-4-5), initially as a personal experiment just to see how well modern coding agents can handle TUIs and I figured a full-on MIDI mixer which has atypical UI requirements would be a more **interesting** test. Opus 4.5 did a good job and after a demo [went viral on X](https://x.com/minimaxir/status/2005779586676842646) people were asking for me to release it, so I decided to spend extra time polishing and comprehensively testing the app before then open-sourcing it. I have written a full analysis of the agentic coding workflow—including the prompts provided to Opus 4.5—in the [agent_notes folder](agent_notes/)._
 
 ## Installation
 
@@ -37,14 +37,14 @@ curl -sL https://github.com/minimaxir/miditui/releases/latest/download/miditui-m
 curl -sL https://github.com/minimaxir/miditui/releases/latest/download/miditui-macos-intel.tar.gz | tar xz
 
 # Linux ARM64
-curl -sL https://github.com/minimaxir/miditui/releases/latest/download/miditui-linux.tar.gz | tar xz
+curl -sL https://github.com/minimaxir/miditui/releases/latest/download/miditui-linux-arm64.tar.gz | tar xz
 
 # Linux x64
-curl -sL https://github.com/minimaxir/miditui/releases/latest/download/miditui-linux.tar.gz | tar xz
-
-# Windows (can also double-click the .exe)
-curl -sL https://github.com/minimaxir/miditui/releases/latest/download/miditui-windows.zip
+curl -sL https://github.com/minimaxir/miditui/releases/latest/download/miditui-linux.tar.gz
+ | tar xz
 ```
+
+For Windows, download and unzip the binary [from here](https://github.com/minimaxir/miditui/releases/latest/download/miditui-windows.zip).
 
 If Rust is installed, you can install the crate directly via `cargo`:
 
