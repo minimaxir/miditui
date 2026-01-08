@@ -19,7 +19,7 @@ An interactive terminal app/UI for MIDI composing, mixing, and playback—writte
 - Undo/Redo support to avoid losing work
 - Import/Export MIDI and JSON files, plus export the music as a WAV file.
 
-Watch this video to see `miditui` in action:
+Watch this video to see `miditui` in action (sound on):
 
 _**Disclosure:** This crate was coded with the assistance of Claude Opus 4.5, mostly as a personal experiment just to see how well modern coding agents can handle TUIs and I figured a full-on MIDI mixer which has atypical UI requirements would be a more **interesting** test. Opus 4.5 did a good job and after a demo [went viral on X](https://x.com/minimaxir/status/2005779586676842646) people were asking for me to release it, so I decided to spend extra time polishing and comprehensively testing the app before then open-sourcing it. I have written a full analysis of the agentic coding workflow—including the prompts provided to Opus 4.5—in the [agent_notes folder](agent_notes/)._
 
@@ -30,20 +30,20 @@ The app binaries can be downloaded from the [Releases page](https://github.com/m
 ```sh
 # macOS Apple Silicon
 curl -sL https://github.com/minimaxir/miditui/releases/latest/download/miditui-macos-arm.tar.gz | tar xz
-./miditui-macos-arm
+./miditui
 
 # macOS Intel
 curl -sL https://github.com/minimaxir/miditui/releases/latest/download/miditui-macos-intel.tar.gz | tar xz
-./miditui-macos-intel
+./miditui
 
 # Linux ARM64
 chmod +x miditui-linux-arm64
-./miditui-linux
+./miditui
 
 # Linux x64
 curl -sL https://github.com/minimaxir/miditui/releases/latest/download/miditui-linux.tar.gz | tar xz
 chmod +x miditui-linux
-./miditui-linux
+./miditui
 
 # Windows (can also double-click the .exe)
 .\miditui-windows.exe
@@ -63,9 +63,13 @@ It is also strongly recommended to use a terminal that support horizontal mouse 
 
 To run `miditui`: if you downloaded the binary, run it in the terminal with `./miditui`. If you installed via Rust, run `cargo run`. On the first load, the app will prompt you to select the path to a SoundFont: the path to the SoundFont will be saved for future runs.
 
+`miditui` loads start in `Normal Mode`, with a combined `Piano Roll` and `Project Timeline` view. In this mode, you can double-click note
+
+Some helpful keyboard shortcuts
+
 There are a _very_ large number of keyboard shortcuts that are too big to fit into the README: press `?` in the app for documentation.
 
-If you want example MIDIs for testing, you can view the examples folder.
+If you want example MIDIs for testing, you can view the [/examples folder](examples/).
 
 ## Notes
 

@@ -12,6 +12,7 @@ build/
 Dance.mid
 *.sf2
 output/
+miditui
 
 /target
 /assets
