@@ -11,7 +11,7 @@ An interactive terminal app/UI for MIDI composing, mixing, and playback—writte
 - Full terminal mouse support: click, drag, scroll, double-click, right-click all work, which allows you to pan views, select notes, click piano keys to play them
 - A piano roll view for showing the notes as they are played in the song
 - An Insert mode to press keys on your keyboard (or simply click the piano roll) and create music in real time: Two-octave QWERTY layout (Z-M and Q-I rows) with live audio playback as you type
-- A project timeline timeline view to see all the notes
+- A project timeline view to see all the MIDI tracks with active notes at the timestep
 - Low-latency 44.1kHz audio via [rustysynth](https://github.com/sinshu/rustysynth)
 - Timeline seeking by clicking the time rulers to skip to any point of the track
 - Unlimited MIDI tracks with per-track mute/solo, volume/pan (L/R) controls, and automatic MIDI channel assignment
@@ -19,7 +19,7 @@ An interactive terminal app/UI for MIDI composing, mixing, and playback—writte
 - Undo/Redo support to avoid losing work
 - Import/Export MIDI and JSON files, plus export the music as a WAV file.
 
-Watch this video to see `miditui` in action (enable sound on the in-line player):
+Watch this video to see `miditui` in action (enable sound within the in-line player on the top-right):
 
 https://github.com/user-attachments/assets/faab0610-e1a8-4c4c-9b94-850fa18aedd3
 
@@ -32,22 +32,18 @@ The app binaries can be downloaded from the [Releases page](https://github.com/m
 ```sh
 # macOS Apple Silicon
 curl -sL https://github.com/minimaxir/miditui/releases/latest/download/miditui-macos-arm.tar.gz | tar xz
-./miditui
 
 # macOS Intel
 curl -sL https://github.com/minimaxir/miditui/releases/latest/download/miditui-macos-intel.tar.gz | tar xz
-./miditui
 
 # Linux ARM64
 curl -sL https://github.com/minimaxir/miditui/releases/latest/download/miditui-linux.tar.gz | tar xz
-./miditui
 
 # Linux x64
 curl -sL https://github.com/minimaxir/miditui/releases/latest/download/miditui-linux.tar.gz | tar xz
-./miditui
 
 # Windows (can also double-click the .exe)
-.\miditui-windows.exe
+curl -sL https://github.com/minimaxir/miditui/releases/latest/download/miditui-windows.zip
 ```
 
 If Rust is installed, you can install the crate directly via `cargo`:
@@ -64,7 +60,7 @@ It is also strongly recommended to use a terminal that support horizontal mouse 
 
 To run `miditui`: if you downloaded the binary, run it in the terminal with `./miditui`. If you installed via Rust, run `cargo run`. On the first load, the app will prompt you to select the path to a SoundFont: the path to the SoundFont will be saved for future runs.
 
-`miditui` opens in `Normal Mode`, with a combined `Piano Roll` and `Project Timeline` view. In this mode, you can move the cursor with the arrow keys and press `Enter` to insert notes, or you can double click where you want to insert the note, or even drag-and-drop notes. This mode also allows for the most keyboard shortcuts, such as `g` to switch cycle between views.
+`miditui` opens in `Normal Mode`, with a combined `Piano Roll` and `Project Timeline` view. In this mode, you can move the cursor with the arrow keys and press `Enter` to insert notes, or you can double click where you want to insert the note, or even drag-and-drop notes. This mode also allows for the most keyboard shortcuts, such as `g` to cycle between views.
 
 To play your composition, press `Space`. You can click the time ruler to seek to a specific point and `.` to reset to the start.
 
