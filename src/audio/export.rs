@@ -146,22 +146,46 @@ where
     let samples_per_tick =
         SAMPLE_RATE as f64 * 60.0 / (project.tempo as f64 * TICKS_PER_BEAT as f64);
 
+    // Pre-compute event sample positions for sample-accurate timing.
+    // This avoids timing drift at high BPMs where buffer boundaries
+    // would otherwise cause events to trigger up to ~93ms early.
+    let event_samples: Vec<usize> = events
+        .iter()
+        .map(|(tick, _, _, _, _)| (*tick as f64 * samples_per_tick) as usize)
+        .collect();
+
     while current_sample < total_samples {
-        // Process any events that should occur before this buffer
-        let current_tick = (current_sample as f64 / samples_per_tick) as u32;
-
-        while event_idx < events.len() && events[event_idx].0 <= current_tick {
-            let (_, is_note_on, channel, pitch, velocity) = events[event_idx];
-            if is_note_on {
-                synth.note_on(channel as i32, pitch as i32, velocity as i32);
+        // Calculate how many samples we can render before the next event
+        let max_samples = (total_samples - current_sample).min(RENDER_BUFFER_SIZE);
+        let samples_to_render = if event_idx < event_samples.len() {
+            let next_event_sample = event_samples[event_idx];
+            if next_event_sample <= current_sample {
+                // Event should trigger now - process all pending events at this sample
+                while event_idx < events.len() && event_samples[event_idx] <= current_sample {
+                    let (_, is_note_on, channel, pitch, velocity) = events[event_idx];
+                    if is_note_on {
+                        synth.note_on(channel as i32, pitch as i32, velocity as i32);
+                    } else {
+                        synth.note_off(channel as i32, pitch as i32);
+                    }
+                    event_idx += 1;
+                }
+                // Recalculate: render up to next event or max buffer
+                if event_idx < event_samples.len() {
+                    (event_samples[event_idx] - current_sample).min(max_samples)
+                } else {
+                    max_samples
+                }
             } else {
-                synth.note_off(channel as i32, pitch as i32);
+                // Render only up to the next event's sample position
+                (next_event_sample - current_sample).min(max_samples)
             }
-            event_idx += 1;
-        }
+        } else {
+            max_samples
+        };
 
-        // Determine buffer size for this iteration
-        let samples_to_render = (total_samples - current_sample).min(RENDER_BUFFER_SIZE);
+        // Ensure we render at least 1 sample to make progress
+        let samples_to_render = samples_to_render.max(1);
 
         // Render audio
         synth.render(
