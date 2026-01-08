@@ -19,7 +19,7 @@ An interactive terminal app/UI for MIDI composing, mixing, and playback—writte
 - Undo/Redo support to avoid losing work
 - Import/Export MIDI and JSON files, plus export the music as a WAV file.
 
-Watch this video to see `miditui` in action (sound on!):
+Watch this video to see `miditui` in action (enable sound on the in-line player):
 
 https://github.com/user-attachments/assets/faab0610-e1a8-4c4c-9b94-850fa18aedd3
 
@@ -39,12 +39,11 @@ curl -sL https://github.com/minimaxir/miditui/releases/latest/download/miditui-m
 ./miditui
 
 # Linux ARM64
-chmod +x miditui-linux-arm64
+curl -sL https://github.com/minimaxir/miditui/releases/latest/download/miditui-linux.tar.gz | tar xz
 ./miditui
 
 # Linux x64
 curl -sL https://github.com/minimaxir/miditui/releases/latest/download/miditui-linux.tar.gz | tar xz
-chmod +x miditui-linux
 ./miditui
 
 # Windows (can also double-click the .exe)
@@ -65,13 +64,19 @@ It is also strongly recommended to use a terminal that support horizontal mouse 
 
 To run `miditui`: if you downloaded the binary, run it in the terminal with `./miditui`. If you installed via Rust, run `cargo run`. On the first load, the app will prompt you to select the path to a SoundFont: the path to the SoundFont will be saved for future runs.
 
-`miditui` loads start in `Normal Mode`, with a combined `Piano Roll` and `Project Timeline` view. In this mode, you can double-click note
+`miditui` opens in `Normal Mode`, with a combined `Piano Roll` and `Project Timeline` view. In this mode, you can move the cursor with the arrow keys and press `Enter` to insert notes, or you can double click where you want to insert the note, or even drag-and-drop notes. This mode also allows for the most keyboard shortcuts, such as `g` to switch cycle between views.
 
-Some helpful keyboard shortcuts
+To play your composition, press `Space`. You can click the time ruler to seek to a specific point and `.` to reset to the start.
 
-There are a _very_ large number of keyboard shortcuts that are too big to fit into the README: press `?` in the app for documentation.
+`Insert Mode`, entered by pressing `i` or right-clicking, allows inserting notes with less friction and playing back notes in real time as if the keyboard was a piano. Single-clicking areas on the piano roll immediately inserts notes, and playing multiple notes on the keyboard at the same time also works.
 
-If you want example MIDIs for testing, you can view the [/examples folder](examples/).
+With a Track selected, you can press `a` to add a track, `m` to mute a track, or `s` to play the track as a solo.
+
+You can save your project to a JSON/MIDI file with `Ctrl+S` or export it as an uncompressed `.wav` file with `e`.
+
+There are a _very_ large number of keyboard shortcuts that are too big to fit into the README: press `?` in the app for documentation. Experimentation is encouraged, and if you break something, `Ctrl+Z` to Undo!
+
+If you want example MIDIs for testing and opening them with `Ctrl+O`, you can view the [/examples folder](examples/).
 
 ## Notes
 
