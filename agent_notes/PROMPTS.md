@@ -1,6 +1,6 @@
 _**Editor's note**: My style of prompting Claude Code is with long Markdown prompts that are comprehensive and ideally give the LLM no wiggle room to interpret intent incorrectly. They are invoked by tagging the file, and then giving the command `implement`. After each prompt, the code is manually reviewed, manually tested to ensure the implementation matches the input prompt, then manually committed to `git`._
 
-_This list of prompts is not 100% comprehensive: quick in-line followups are not recorded._
+_This list of prompts is not 100% comprehensive: quick in-line followups are not recorded. Prompts made after public release are not recorded._
 
 # 01.md
 
@@ -403,3 +403,9 @@ When creating a new project via CTRL+N:
 # 40.md
 
 Test additional different compiliation optimization settings to reduce the size of the Rust `release` binary to be as small as possible. Keep track of the binary sizes across different settings.
+
+---
+
+# 41.md
+
+The beat of the exported `.wav` file is off at high BPMs. Is the math for the WAV export correct of the beat is greater than 120? fix for export only
