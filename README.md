@@ -51,7 +51,7 @@ If Rust is installed, you can install the crate directly via `cargo`:
 cargo install miditui
 ```
 
-Additionally, a SoundFont file (`.sf2`) is required to run `miditui`. There are many free SoundFonts which are commercially friendly for music generation: a small one is `TimGM6mb.sf2` ([6 MB, direct download link](https://sourceforge.net/p/mscore/code/HEAD/tree/trunk/mscore/share/sound/TimGM6mb.sf2?format=raw)), while a more robust SoundFont is [GeneralUser GS](https://github.com/mrbumpy409/GeneralUser-GS/tree/main) ([32.3 MB, direct download link](https://github.com/mrbumpy409/GeneralUser-GS/raw/refs/heads/main/GeneralUser-GS.sf2)).
+Additionally, a SoundFont file (`.sf2`) is required to run `miditui`. There are many free SoundFonts which are commercially friendly for music generation: a small one is `TimGM6mb.sf2` ([6 MB, direct download link](https://sourceforge.net/p/mscore/code/HEAD/tree/trunk/mscore/share/sound/TimGM6mb.sf2?format=raw)), while a more robust SoundFont is [GeneralUser GS](https://github.com/mrbumpy409/GeneralUser-GS/tree/main) (32.3 MB, [via the "GeneralUser GS 2.0.2 w/ documentation rev. 4" link](https://www.schristiancollins.com/generaluser)).
 
 It is also strongly recommended to use a terminal that support horizontal mouse scrolling which not all do: I recommend [Ghostty](https://ghostty.org).
 
