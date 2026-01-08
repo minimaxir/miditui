@@ -40,8 +40,7 @@ curl -sL https://github.com/minimaxir/miditui/releases/latest/download/miditui-m
 curl -sL https://github.com/minimaxir/miditui/releases/latest/download/miditui-linux-arm64.tar.gz | tar xz
 
 # Linux x64
-curl -sL https://github.com/minimaxir/miditui/releases/latest/download/miditui-linux.tar.gz
- | tar xz
+curl -sL https://github.com/minimaxir/miditui/releases/latest/download/miditui-linux.tar.gz | tar xz
 ```
 
 For Windows, download and unzip the binary [from here](https://github.com/minimaxir/miditui/releases/latest/download/miditui-windows.zip).
