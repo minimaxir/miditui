@@ -19,7 +19,9 @@ An interactive terminal app/UI for MIDI composing, mixing, and playback—writte
 - Undo/Redo support to avoid losing work
 - Import/Export MIDI and JSON files, plus export the music as a WAV file.
 
-Watch this video to see `miditui` in action (sound on):
+Watch this video to see `miditui` in action (sound on!):
+
+https://github.com/user-attachments/assets/faab0610-e1a8-4c4c-9b94-850fa18aedd3
 
 _**Disclosure:** This crate was coded with the assistance of Claude Opus 4.5, mostly as a personal experiment just to see how well modern coding agents can handle TUIs and I figured a full-on MIDI mixer which has atypical UI requirements would be a more **interesting** test. Opus 4.5 did a good job and after a demo [went viral on X](https://x.com/minimaxir/status/2005779586676842646) people were asking for me to release it, so I decided to spend extra time polishing and comprehensively testing the app before then open-sourcing it. I have written a full analysis of the agentic coding workflow—including the prompts provided to Opus 4.5—in the [agent_notes folder](agent_notes/)._
 
